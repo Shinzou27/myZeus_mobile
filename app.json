@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "my-zeus-app",
+    "slug": "my-zeus-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/favicon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/logo_short.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff",
+      "width": 100
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
