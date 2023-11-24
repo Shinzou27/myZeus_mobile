@@ -10,10 +10,10 @@ import { useEffect, useState } from 'react';
 
 export default function App() {
   const scheme = useColorScheme();
-  const [data, setData] = useState([]);
+  const [user, setUser] = useState();
   const [screen, setScreen] = useState('');
   useEffect(() => {
-    setScreen('home');
+    setScreen('login');
   }, [])
   function handleNavigate(screen) {
     console.log(`Indo para a tela de ${screen}`);
@@ -28,9 +28,9 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <View style={theme[`theme_${scheme}`]}>
-        {screen == 'login' ? <Login/> :
-          screen == 'new' ? <NewReport/> :
-            screen == 'list' ? <ReportList/> :
+        {screen == 'login' ? <Login setter={setUser} handleNavigate={handleNavigate}/> :
+          screen == 'new' ? <NewReport user={user}/> :
+            screen == 'list' ? <ReportList user={user}/> :
               <Home handleNavigate={handleNavigate} />
         }
       </View>

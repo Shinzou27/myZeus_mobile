@@ -6,9 +6,12 @@ import Input from '../components/Input';
 import { useColorScheme } from "react-native";
 import theme, { project_color } from '../theme'
 
-export default function NewReport() {
+export default function NewReport({user}) {
     const [date, setDate] = useState('');
     const [cost, setCost] = useState('');
+    const [brand, setBrand] = useState('');
+    const [amount, setAmount] = useState();
+
     const scheme = useColorScheme();
     function parseDate(date) {
         let toFormat = date.split('/');
@@ -24,16 +27,26 @@ export default function NewReport() {
     function handlePost() {
         const toPostDate = new Date(parseDate(date));
         const toPostCost = cost.replace('R$', '');
-        console.log(toPostCost);
+        const toPostAmount = parseInt(amount);
         if (!isNaN(toPostDate)) {
-            api.post('/reports', { date: toPostDate, cost: toPostCost }).then((response) => console.log(response.data)).catch((e) => console.log(e.message));
+            api.post('/reports',
+            {
+                date: toPostDate,
+                cost: toPostCost,
+                brand: brand,
+                amount: toPostAmount,
+                userId: user.id
+            }
+            ).then((response) => console.log(response.data)).catch((e) => console.log(e.message));
         }
     }
     return (
         <>
-            <Input data={date} setter={setDate} text={'Adicione a data que a ração foi comprada:'} type={'date'} />
+            <Input data={date} setter={setDate} text={'Data de compra:'} type={'date'} />
             <BouncyCheckBox style={styles.separator} size={25} text='Hoje' onPress={setToday} />
-            <Input data={cost} setter={setCost} text={'Adicione o custo da ração comprada:'} type={'cost'} />
+            <Input data={cost} setter={setCost} text={'Custo da ração:'} type={'cost'} />
+            <Input data={brand} setter={setBrand} text={'Marca da ração:'} type={'brand'} />
+            <Input data={amount} setter={setAmount} text={'Quantidade:'} type={'amount'} />
             <View style={styles.separator}></View>
             <Button onPress={handlePost} color={project_color} title='Enviar'></Button>
         </>

@@ -6,11 +6,12 @@ import theme from "../theme";
 function Input({text, data, setter, type}) {
     let scheme = useColorScheme();
     let placeholder;
-    if(['date', 'cost'].includes(type)) {
+    if(['date', 'cost', 'brand', 'amount'].includes(type)) {
         let mask;
-        type == 'date'
-            ? [placeholder, mask] = ['__/__/___', [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]]
-            : [placeholder, mask] = ['R$', ['R', '$', /\d/, /\d/, ',', /\d/, /\d/]];
+        type == 'date' ? [placeholder, mask] = ['__/__/___', [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]]
+            : type == 'cost' ? [placeholder, mask] = ['R$', ['R', '$', /\d/, /\d/, ',', /\d/, /\d/]]
+            : type == 'brand' ? placeholder = 'Ex.: A, B, C'
+            : placeholder = 'Ex.: 100, 200, 1000'
         function handleChange(masked, unmasked) {
             setter(masked);
         }
@@ -22,13 +23,13 @@ function Input({text, data, setter, type}) {
         );
     } else {
         type == 'user' ? placeholder = 'Nome de usuário' : placeholder = 'Senha';
-        function handlePress() {
-            setter(data);
+        function handlePress(t) {
+            setter(t);
         }
         return (
             <View style={styles.view}>
                 <Text style={theme[`font_${scheme}`]} >{text}</Text>
-                <TextInput value={data} onKeyPress={handlePress} placeholder={placeholder} style={theme.theme_light} />
+                <TextInput value={data} autoCapitalize="none" onChangeText={(t) => handlePress(t)} placeholder={placeholder} style={theme.theme_light} />
             </View>
         );
     }
