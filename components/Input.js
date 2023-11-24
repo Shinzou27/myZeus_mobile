@@ -18,7 +18,7 @@ function Input({text, data, setter, type}) {
         return (
             <View style={styles.view} >
                 <Text style={theme[`font_${scheme}`]} >{text}</Text>
-                <MaskInput value={data} onChangeText={handleChange} mask={mask} placeholder={placeholder} style={theme.theme_light}/>
+                <MaskInput value={data} onChangeText={handleChange} mask={mask} placeholder={placeholder} style={[styles.input, theme.theme_light]}/>
             </View>
         );
     } else {
@@ -29,7 +29,7 @@ function Input({text, data, setter, type}) {
         return (
             <View style={styles.view}>
                 <Text style={theme[`font_${scheme}`]} >{text}</Text>
-                <TextInput value={data} autoCapitalize="none" onChangeText={(t) => handlePress(t)} placeholder={placeholder} style={theme.theme_light} />
+                <TextInput value={data} autoCapitalize="none" onChangeText={(t) => handlePress(t)} placeholder={placeholder} style={[styles.input, theme.theme_light]}/>
             </View>
         );
     }
@@ -39,6 +39,12 @@ export default Input;
 const styles = StyleSheet.create({
     view: {
         height: 80,
-        width: 300
+        width: 300,
+    },
+    input: {
+        borderRadius: 5,
+        marginVertical: 5,
+        paddingHorizontal: 5,
+        borderWidth: StyleSheet.hairlineWidth
     }
 })

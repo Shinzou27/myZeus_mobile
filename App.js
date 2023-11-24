@@ -4,7 +4,7 @@ import ReportList from './pages/ReportList';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import { View } from 'react-native';
-import { useColorScheme, BackHandler } from 'react-native';
+import { useColorScheme, BackHandler, Text } from 'react-native';
 import theme from './theme';
 import { useEffect, useState } from 'react';
 
@@ -25,13 +25,21 @@ export default function App() {
       return true;
     }
   })
-  return (
-    <SafeAreaProvider>
-      <View style={theme[`theme_${scheme}`]}>
-        {screen == 'login' ? <Login setter={setUser} handleNavigate={handleNavigate}/> :
+  /*
+          {screen == 'login' ? <Login setter={setUser} handleNavigate={handleNavigate}/> :
           screen == 'new' ? <NewReport user={user}/> :
             screen == 'list' ? <ReportList user={user}/> :
               <Home handleNavigate={handleNavigate} />
+        }
+        */
+  console.log(!user);
+  return (
+    <SafeAreaProvider>
+      <View style={theme[`theme_${scheme}`]}>
+        {!user ? <Login setter={setUser} handleNavigate={handleNavigate} />
+          : screen == 'new' ? <NewReport handleNavigate={handleNavigate} user={user} /> :
+            screen == 'list' ? <ReportList user={user} /> :
+              <Home handleNavigate={handleNavigate} user={user} />
         }
       </View>
     </SafeAreaProvider>
