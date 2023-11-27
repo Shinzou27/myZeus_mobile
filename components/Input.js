@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { useColorScheme } from "react-native";
-import MaskInput from 'react-native-mask-input'
+import MaskInput, {Masks, createNumberMask} from 'react-native-mask-input'
 import theme from "../theme";
 
 function Input({text, data, setter, type}) {
@@ -8,10 +8,10 @@ function Input({text, data, setter, type}) {
     let placeholder;
     if(['date', 'cost', 'brand', 'amount'].includes(type)) {
         let mask;
-        type == 'date' ? [placeholder, mask] = ['__/__/___', [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]]
-            : type == 'cost' ? [placeholder, mask] = ['R$', ['R', '$', /\d/, /\d/, ',', /\d/, /\d/]]
+        type == 'date' ? [placeholder, mask] = ['__/__/___', Masks.DATE_DDMMYYYY]
+            : type == 'cost' ? [placeholder, mask] = ['R$', Masks.BRL_CURRENCY]
             : type == 'brand' ? placeholder = 'Ex.: A, B, C'
-            : placeholder = 'Ex.: 100, 200, 1000'
+            : [placeholder, mask] = ['Ex.: 100, 200, 1000', createNumberMask({delimiter: '.', precision: 0})]
         function handleChange(masked, unmasked) {
             setter(masked);
         }
