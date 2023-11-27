@@ -32,7 +32,6 @@ export default function App() {
               <Home handleNavigate={handleNavigate} />
         }
         */
-  console.log(!user);
   return (
     <SafeAreaProvider>
       <View style={theme[`theme_${scheme}`]}>

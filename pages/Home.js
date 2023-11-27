@@ -7,7 +7,7 @@ function Home({ handleNavigate, user }) {
     return (
         <View>
             <View style={styles.topView}>
-                <Text style={[styles.topViewTxt, theme[`font_${scheme}`]]}>{`Seja bem-vindo, ${user.username}!`}</Text>
+                <Text style={[styles.topViewTxt, theme[`font_${scheme}`]]}>{`Seja bem-vindo(a), ${user.username}!`}</Text>
             </View>
             <View style={styles.flex}>
                 <View style={styles.btnView}>
