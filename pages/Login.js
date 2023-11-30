@@ -4,17 +4,22 @@ import Input from "../components/Input";
 import Logo from "../components/Logo";
 import Title from "../components/Title";
 import { useState } from "react";
-import { project_color } from "../theme";
+import { project_color_30 } from "../theme";
 import { api } from "../services/api";
 
-function Login({ user, setter, handleNavigate }) {
+function Login({ setUser, setPets, handleNavigate }) {
     const scheme = useColorScheme();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    let id;
     function handleLog() {
         api.get(`/users?username=${username}&password=${password}`).then((response) => {
-            setter(response.data);
-            handleNavigate('home');
+            setUser(response.data);
+            id = parseInt(response.data.id);
+            api.get(`/pets?id=${id}`).then((response) => {
+                setPets(response.data);
+                handleNavigate('home');
+            }).catch((e) => console.log(e.message));
         }).catch((e) => console.log(e.message));
     }
     return (
@@ -23,7 +28,7 @@ function Login({ user, setter, handleNavigate }) {
             <Title text={'Entre ou cadastre-se!'}/>
             <Input text={'Nome de usuário:'} data={username} setter={setUsername} type={'user'} />
             <Input text={'Senha:'} data={password} setter={setPassword} type={'password'} />
-            <Button onPress={handleLog} color={project_color} title='Entrar'></Button>
+            <Button onPress={handleLog} color={project_color_30} title='Entrar'></Button>
         </View>
     );
 }

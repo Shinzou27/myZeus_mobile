@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 export default function App() {
   const scheme = useColorScheme();
   const [user, setUser] = useState();
+  const [pets, setPets] = useState();
   const [screen, setScreen] = useState('');
   useEffect(() => {
     setScreen('login');
@@ -25,19 +26,12 @@ export default function App() {
       return true;
     }
   })
-  /*
-          {screen == 'login' ? <Login setter={setUser} handleNavigate={handleNavigate}/> :
-          screen == 'new' ? <NewReport user={user}/> :
-            screen == 'list' ? <ReportList user={user}/> :
-              <Home handleNavigate={handleNavigate} />
-        }
-        */
   return (
     <SafeAreaProvider>
       <View style={theme[`theme_${scheme}`]}>
-        {!user ? <Login setter={setUser} handleNavigate={handleNavigate} />
-          : screen == 'new' ? <NewReport handleNavigate={handleNavigate} user={user} /> :
-            screen == 'list' ? <ReportList user={user} /> :
+        {!user ? <Login setUser={setUser} setPets={setPets} handleNavigate={handleNavigate} />
+          : screen == 'new' ? <NewReport handleNavigate={handleNavigate} user={user} pets={pets} /> :
+            screen == 'list' ? <ReportList user={user} pets={pets} /> :
               <Home handleNavigate={handleNavigate} user={user} />
         }
       </View>
