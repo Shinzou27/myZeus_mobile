@@ -1,5 +1,5 @@
-import theme, { project_color } from "../theme";
-import { Button, View, Text, useColorScheme, Dimensions } from "react-native";
+import theme, { project_color_30 } from "../theme";
+import { Button, View, Text, useColorScheme } from "react-native";
 import { StyleSheet } from "react-native";
 
 function Home({ handleNavigate, user }) {
@@ -11,10 +11,10 @@ function Home({ handleNavigate, user }) {
             </View>
             <View style={styles.flex}>
                 <View style={styles.btnView}>
-                    <Button onPress={() => handleNavigate('new')} title='Adicionar relatório' color={project_color} />
+                    <Button onPress={() => handleNavigate('new')} title='Adicionar relatório' color={project_color_30} />
                 </View>
                 <View style={styles.btnView}>
-                    <Button onPress={() => handleNavigate('list')} title='Ver lista de relatórios' color={project_color} />
+                    <Button onPress={() => handleNavigate('list')} title='Ver lista de relatórios' color={project_color_30} />
                 </View>
             </View>
         </View>
