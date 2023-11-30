@@ -8,17 +8,18 @@ function Input({text, data, setter, type}) {
     let placeholder;
     if(['date', 'cost', 'brand', 'amount'].includes(type)) {
         let mask;
-        type == 'date' ? [placeholder, mask] = ['__/__/___', Masks.DATE_DDMMYYYY]
-            : type == 'cost' ? [placeholder, mask] = ['R$', Masks.BRL_CURRENCY]
+        let keyboardType;
+        type == 'date' ? [placeholder, mask, keyboardType] = ['__/__/___', Masks.DATE_DDMMYYYY, 'numeric']
+            : type == 'cost' ? [placeholder, mask, keyboardType] = ['R$', Masks.BRL_CURRENCY, 'numeric']
             : type == 'brand' ? placeholder = 'Ex.: A, B, C'
-            : [placeholder, mask] = ['Ex.: 100, 200, 1000', createNumberMask({delimiter: '.', precision: 0})]
+            : [placeholder, mask, keyboardType] = ['Ex.: 100, 200, 1000', createNumberMask({delimiter: '.', precision: 0}), 'numeric']
         function handleChange(masked, unmasked) {
             setter(masked);
         }
         return (
             <View style={styles.view} >
                 <Text style={theme[`font_${scheme}`]} >{text}</Text>
-                <MaskInput value={data} onChangeText={handleChange} mask={mask} placeholder={placeholder} style={[styles.input, theme.theme_light]}/>
+                <MaskInput value={data} keyboardType={keyboardType} onChangeText={handleChange} mask={mask} placeholder={placeholder} style={[styles.input, theme.theme_light]}/>
             </View>
         );
     } else {
