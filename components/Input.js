@@ -3,16 +3,15 @@ import { useColorScheme } from "react-native";
 import MaskInput, {Masks, createNumberMask} from 'react-native-mask-input'
 import theme from "../theme";
 
-function Input({text, data, setter, type}) {
+function Input({text, data, setter, type, placeholder}) {
     let scheme = useColorScheme();
-    let placeholder;
-    if(['date', 'cost', 'brand', 'amount'].includes(type)) {
+    if(['date', 'cost', 'brand', 'amount', 'name', 'breed'].includes(type)) {
         let mask;
         let keyboardType;
-        type == 'date' ? [placeholder, mask, keyboardType] = ['__/__/___', Masks.DATE_DDMMYYYY, 'numeric']
-            : type == 'cost' ? [placeholder, mask, keyboardType] = ['R$', Masks.BRL_CURRENCY, 'numeric']
-            : type == 'brand' ? placeholder = 'Ex.: A, B, C'
-            : [placeholder, mask, keyboardType] = ['Ex.: 100, 200, 1000', createNumberMask({delimiter: '.', precision: 0}), 'numeric']
+        type == 'date' ? [mask, keyboardType] = [Masks.DATE_DDMMYYYY, 'numeric']
+            : type == 'cost' ? [mask, keyboardType] = [Masks.BRL_CURRENCY, 'numeric']
+            : type == 'amount' ? [mask, keyboardType] = [createNumberMask({delimiter: '.', precision: 0}), 'numeric']
+            : keyboardType = 'default';
         function handleChange(masked, unmasked) {
             setter(masked);
         }
@@ -23,14 +22,15 @@ function Input({text, data, setter, type}) {
             </View>
         );
     } else {
-        type == 'user' ? placeholder = 'Nome de usuário' : placeholder = 'Senha';
+        let isPassword;
+        type == 'user' ? isPassword = false : isPassword = true;
         function handlePress(t) {
             setter(t);
         }
         return (
             <View style={styles.view}>
                 <Text style={theme[`font_${scheme}`]} >{text}</Text>
-                <TextInput value={data} autoCapitalize="none" onChangeText={(t) => handlePress(t)} placeholder={placeholder} style={[styles.input, theme.theme_light]}/>
+                <TextInput value={data} secureTextEntry={isPassword} autoCapitalize="none" onChangeText={(t) => handlePress(t)} placeholder={placeholder} style={[styles.input, theme.theme_light]}/>
             </View>
         );
     }
