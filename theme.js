@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-export const project_color_30 = '#00eeaa';
-export const project_color_10 = '#ebb915';
+export const project_color_30 = '#6e85eb';
+export const project_color_10 = '#ebc75e';
 export default theme = StyleSheet.create({
     theme_light: {
         backgroundColor: '#ffffff',
