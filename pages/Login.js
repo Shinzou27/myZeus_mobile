@@ -41,7 +41,7 @@ function Login({ setUser, setPets, handleNavigate }) {
                     <Button onPress={handleLog} color={project_color_30} title='Entrar'></Button>
                 </View>
                 <View style={{width: 120, marginHorizontal: 10}}>
-                    <Button onPress={handleLog} color={project_color_10} title='Criar conta'></Button>
+                    <Button onPress={() => handleNavigate('register')} color={project_color_10} title='Criar conta'></Button>
                 </View>
             </View>
         </View>

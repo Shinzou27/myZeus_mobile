@@ -10,6 +10,7 @@ import bg from './assets/bg.png'
 import { useEffect, useState } from 'react';
 import NewPet from './pages/NewPet';
 import PetList from './pages/PetList';
+import Register from './pages/Register';
 
 export default function App() {
   const scheme = useColorScheme();
@@ -33,7 +34,9 @@ export default function App() {
     <SafeAreaProvider>
       <View style={theme[`theme_${scheme}`]}>
         <ImageBackground resizeMode='cover' style={{ flex: 1, justifyContent: 'center', opacity: 1 }} source={bg}>
-          {!user ? <Login setUser={setUser} setPets={setPets} handleNavigate={handleNavigate} />
+          {!user ?
+              screen == 'login' ? <Login setUser={setUser} setPets={setPets} handleNavigate={handleNavigate} />
+              : <Register setUser={setUser} setPets={setPets} handleNavigate={handleNavigate}/>
             : screen == 'new' ? <NewReport handleNavigate={handleNavigate} user={user} pets={pets} setPets={setPets} /> :
               screen == 'newpet' ? <NewPet user={user} /> :
               screen == 'list' ? <ReportList user={user} pets={pets} /> :
