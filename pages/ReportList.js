@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import ReportRow from "../components/ReportRow";
 import Title from "../components/Title";
 import Separator from "../components/Separator";
+import BackButton from '../components/BackButton';
 
-function ReportList({ user, pets }) {
+function ReportList({ user, pets, handleNavigate }) {
     const scheme = useColorScheme();
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -28,6 +29,7 @@ function ReportList({ user, pets }) {
     }
     return (
         <SafeAreaView style={[styles.view, theme[`theme_${scheme}`]]}>
+            <BackButton handleNavigate={handleNavigate} />
             <Title text={'Lista de relatórios'} />
             <Separator />
             <ScrollView contentContainerStyle={[styles.scrollView]}>

@@ -38,9 +38,9 @@ export default function App() {
               screen == 'login' ? <Login setUser={setUser} setPets={setPets} handleNavigate={handleNavigate} />
               : <Register setUser={setUser} setPets={setPets} handleNavigate={handleNavigate}/>
             : screen == 'new' ? <NewReport handleNavigate={handleNavigate} user={user} pets={pets} setPets={setPets} /> :
-              screen == 'newpet' ? <NewPet user={user} /> :
-              screen == 'list' ? <ReportList user={user} pets={pets} /> :
-              screen == 'petlist' ? <PetList user={user} /> :
+              screen == 'newpet' ? <NewPet user={user} handleNavigate={handleNavigate} /> :
+              screen == 'list' ? <ReportList user={user} handleNavigate={handleNavigate} pets={pets} /> :
+              screen == 'petlist' ? <PetList user={user} handleNavigate={handleNavigate} /> :
               <Home handleNavigate={handleNavigate} setUser={setUser} user={user} />
           }
         </ImageBackground>
