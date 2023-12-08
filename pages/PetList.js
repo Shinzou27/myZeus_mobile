@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import PetRow from "../components/PetRow";
 import Title from "../components/Title";
 import Separator from "../components/Separator";
+import BackButton from "../components/BackButton";
 
-function PetList({ user }) {
+function PetList({ user, handleNavigate }) {
     const scheme = useColorScheme();
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -16,6 +17,7 @@ function PetList({ user }) {
     }, []);
     return (
         <SafeAreaView style={[styles.view, theme[`theme_${scheme}`]]}>
+            <BackButton handleNavigate={handleNavigate} />
             <Title text={'Lista de pets'} />
             <Separator />
             <ScrollView contentContainerStyle={[styles.scrollView]}>

@@ -3,7 +3,7 @@ import { useColorScheme } from "react-native";
 import MaskInput, {Masks, createNumberMask} from 'react-native-mask-input'
 import theme from "../theme";
 
-function Input({text, data, setter, type, placeholder}) {
+function Input({text, data, setter, type, placeholder, maskLimit}) {
     let scheme = useColorScheme();
     if(['date', 'cost', 'brand', 'amount', 'name', 'breed'].includes(type)) {
         let mask;
@@ -13,12 +13,16 @@ function Input({text, data, setter, type, placeholder}) {
             : type == 'amount' ? [mask, keyboardType] = [createNumberMask({delimiter: '.', precision: 0}), 'numeric']
             : keyboardType = 'default';
         function handleChange(masked, unmasked) {
-            setter(masked);
+            if(type == 'cost' || type == 'amount') {
+                setter(unmasked);
+            } else {
+                setter(masked);
+            }
         }
         return (
             <View style={styles.view} >
                 <Text style={theme[`font_${scheme}`]} >{text}</Text>
-                <MaskInput value={data} keyboardType={keyboardType} onChangeText={handleChange} mask={mask} placeholder={placeholder} style={[styles.input, theme.theme_light]}/>
+                <MaskInput maxLength={maskLimit} value={data} keyboardType={keyboardType} onChangeText={handleChange} mask={mask} placeholder={placeholder} style={[styles.input, theme.theme_light]}/>
             </View>
         );
     } else {
